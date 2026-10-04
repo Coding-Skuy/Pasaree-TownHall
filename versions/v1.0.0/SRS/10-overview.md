@@ -1,13 +1,11 @@
 > Versi: v1.0.0 | Status: disetujui | Menggantikan: -
 
-# Timeline Living
+# SRS Overview
 
 Pasaree mengelola lapak terkurasi, katalog real-time dari stok Lumbung, komisi transparan anti double-charge, payout via Lumbung, DB pasaree, dan JWT audien pasaree.
 
-- v1.0.0: dokumen dasar disetujui.
-- v1.1.0: validasi QA/TDD dan kontrak service.
-- v2.0.0: scale lintas klaster.
+Dokumen ini menjadi cetak biru formal untuk pengembang dan QA. TDD wajib menurunkan test dari requirement di sini.
 
 ## Batasan
 
-Timeline ini living; snapshot beku ada di versions/v1.0.0/SNAPSHOT-ROADMAP.md.
+SRS tidak memuat kode produksi; hanya requirement formal dan QA gate.

@@ -1,13 +1,12 @@
 > Versi: v1.0.0 | Status: disetujui | Menggantikan: -
 
-# Timeline Living
+# BRD - Katalog
 
 Pasaree mengelola lapak terkurasi, katalog real-time dari stok Lumbung, komisi transparan anti double-charge, payout via Lumbung, DB pasaree, dan JWT audien pasaree.
 
-- v1.0.0: dokumen dasar disetujui.
-- v1.1.0: validasi QA/TDD dan kontrak service.
-- v2.0.0: scale lintas klaster.
+- BR-003: Katalog wajib mendukung tujuan bisnis divisi Pasaree.
+- Metrik utama harus dapat diverifikasi QA.
 
 ## Batasan
 
-Timeline ini living; snapshot beku ada di versions/v1.0.0/SNAPSHOT-ROADMAP.md.
+BRD tidak berisi desain teknis atau kode.
