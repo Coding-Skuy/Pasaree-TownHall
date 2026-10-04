@@ -1,53 +1,44 @@
-# Pasaree-TownHall
+> Versi: v1.0.0 | Status: disetujui | Menggantikan: -
 
-> TownHall **Marketplace & Commerce** ChefGenie — lapak, katalog, produsen lokal. Fulfillment via trip Lumbung.
+# Pasaree-TownHall — Divisi Pasar (Marketplace & Commerce) PT ChefGenie
 
-## 1. Peran
+## Peran Pasaree
 
-- **Menjual:** pendaftaran lapak, kurasi, tayang produk, stok & harga (Web lapak/admin).
-- **Membeli:** jelajah katalog, keranjang, checkout, bayar, lacak, ulasan (Mobile beli).
-- **Tidak dilakukan di sini:** armada, gudang, jadwal trip, kas/payout — seluruhnya milik **Lumbung-TownHall** dan diakses via integrasi proksi.
-- **Dapur bersama** (Pawonee/Pedaree) menjadi jalur verifikasi higiene produsen pangan.
+Pasaree adalah divisi pasar PT ChefGenie: lapak terkurasi produsen lokal, katalog dengan stok real-time, dan checkout transparan. Fokus Pasaree-first: produsen lokal lolos kurasi, pembeli mendapat harga jujur sebelum ongkir, lapak menerima payout adil setelah komisi transparan. Skala Varian 1: lapak terkurasi dengan minimal 3 produk tayang per lapak, konfirmasi pesanan maksimal 2 jam jam kerja, kurasi maksimal 2x24 jam kerja. Sukses = lapak aktif: minimal 60 persen lapak berstatus AKTIF memenuhi syarat tiap bulan, konfirmasi tepat waktu minimal 90 persen, retur bermasalah maksimal 2 persen. Monetisasi: komisi transparan 8 persen dari subtotal per sub-pesanan (paket hampers 10 persen, promo lapak baru 5 persen selama 30 hari), ditambah biaya layanan pembeli Rp2.000 per checkout; ongkir 100 persen diteruskan ke kas trip Lumbung. Basis data: DB pasaree (terpisah dari divisi lain). Autentikasi: JWT Bearer dengan klaim audien tepat `pasaree`; token lintas divisi tanpa audien pasaree ditolak 401; proksi ke Lumbung memakai token layanan internal, bukan token pengguna.
 
-## 2. Peta Folder
+## Peta Versi Aktif
 
-```
-lapak/      00-piagam-kurasi.md         Prinsip, kriteria, larangan, SLA kurasi
-            10-sop-tayang-produk.md     SOP draf → tayang, peran, status
-katalog/    10-model-data.md            Skema Lapak/Produk/Varian/Media + DTO Kotlin & TS
-produk/     10-alur-beli.md             Status pesanan, checkout multi-lapak, retur
-            20-kontrak-api-KMP-mobile.md REST untuk mobile (katalog, keranjang, bayar, trip proksi)
-            21-kontrak-api-web-bun.md   REST untuk web (draf, stok, pesanan masuk, kurasi)
-            30-modul-KMP-bersama.md     Struktur shared/domain/network/storage/sync
-platform/   10-matriks-KMP-web.md       Pembagian mobile vs web + aturan anti-duplikasi
-            40-mobile-KMP.md            Android+iOS, Compose Multiplatform + Navigation3
-            50-web-bun-svelte.md        Bun 1.4.x + Svelte 5 + SvelteKit 2 + TS 5.9.x
-            60-offline-sinkron.md       Offline-first, antrean idempoten, konflik server-menang
-keuangan/   10-komisi-transparan.md     Tarif 8% (hampers 10%), escrow, payout via Lumbung
-metrik/     10-lapak-aktif.md           Definisi lapak aktif + target Varian 1
-```
+- Versi aktif: v1.0.0 (disetujui). Isi beku ada di `versions/v1.0.0/`.
+- `versions/v1.0.0/CHANGELOG.md` — ringkasan versi awal.
+- `versions/v1.0.0/BRD/` — kebutuhan bisnis BR-001 dan seterusnya.
+- `versions/v1.0.0/PRD/` — pengguna dan kriteria US-001 dan seterusnya.
+- `versions/v1.0.0/FRD/` — kebutuhan fungsional FR-001 dan seterusnya.
+- `versions/v1.0.0/FSD/` — rancangan alur, model data Lapak, Produk, Varian, Media, dan kontrak API.
+- `versions/v1.0.0/SNAPSHOT-ROADMAP.md` — salinan beku janji v1.0.0.
+- Peta hidup lintas versi ada di `roadmap/`: `TIMELINE.md`, `MILESTONE.md`, `ROADMAP.md`.
 
-## 3. Stack (dikunci Varian 1)
+## Cara Baca History
 
-- **Mobile beli:** Kotlin Multiplatform (Kotlin 2.1.x) + Compose Multiplatform 1.7.x + Navigation3 1.0.x. Target **Android 9+ dan iOS 16+**. Tanpa desktop (tidak ada modul desktopApp/target JVM-desktop).
-- **Web lapak/admin:** Bun 1.4.x + Svelte 5 + SvelteKit 2 + TypeScript 5.9.x. Tanpa desktop (tanpa Electron/Tauri; via browser).
-- **Kontrak bersama:** ID ULID string, waktu ISO-8601 UTC, uang integer IDR, paginasi cursor, idempotency-key untuk bayar dan aksi antre.
-- **Offline:** SQLDelight + SyncWorker (mobile), autosave + outbox IndexedDB (web). Bayar tidak pernah offline.
+1. Mulai dari `versions/v1.0.0/CHANGELOG.md` untuk ringkasan versi.
+2. Lanjut ke `versions/v1.0.0/BRD/00-ikhtisar.md` untuk konteks bisnis, lalu `PRD/10-pengguna.md` untuk peran.
+3. Untuk janji waktu itu, baca `versions/v1.0.0/SNAPSHOT-ROADMAP.md` yang sudah dibekukan dan tidak diubah lagi.
+4. Untuk kondisi terkini lintas versi, baca `roadmap/TIMELINE.md` dan `roadmap/MILESTONE.md`.
+5. Riwayat perubahan antar versi dilacak lewat `git log` dan `CHANGELOG.md` tiap versi. File lama sengaja dihapus setelah dipindah dengan `git mv` agar tidak ada dua sumber kebenaran.
 
-## 4. Tautan Lumbung (Distribusi & Keuangan)
+## TownHall Lain dan Pedoman Induk
 
-Pasaree membaca dan memproksi, tidak memiliki sendiri:
+Pedoman induk: https://github.com/Coding-Skuy/ChefGenie-TownHall.
 
-- **Distribusi (trip):** `GET /trip` proksi — `trip_id, jadwal_berangkat, rute, titik_serah, kapasitas, ongkir`. Serah-terima pindaian kurir menjadi dasar lepas escrow. Lihat `produk/10-alur-beli.md` §6 dan `produk/20-kontrak-api-KMP-mobile.md` §5.
-- **Keuangan (kas/payout):** escrow kasir Pasaree → payout T+1 via Lumbung setelah dipotong komisi transparan. Rekonsiliasi harian. Lihat `keuangan/10-komisi-transparan.md` §3–4.
-- **Titik serah:** setiap lapak wajib mengisi `titik_serah_lumbung_id` (lihat `katalog/10-model-data.md` §2.2). Pengiriman di luar trip memerlukan persetujuan kurator + catat manual.
+Lima TownHall lain yang meniru pola template emas ini:
 
-## 5. Mulai Cepat
+- https://github.com/Coding-Skuy/Lumbung-TownHall — distribusi trip dan keuangan payout; Pasaree memproksi trip dan mengeksekusi payout via Lumbung.
+- https://github.com/Coding-Skuy/Pawonee-TownHall — dapur dan pengolahan, jalur verifikasi higiene produsen pangan.
+- https://github.com/Coding-Skuy/Pedaree-TownHall — pengantar dan last-mile, mitra verifikasi dapur bersama.
+- https://github.com/Coding-Skuy/TitipO-TownHall — titip dan kemitraan.
+- https://github.com/Coding-Skuy/Titeny-TownHall — ketelitian dan audit mutu.
 
-1. Baca `lapak/00-piagam-kurasi.md` lalu `lapak/10-sop-tayang-produk.md`.
-2. Pahami data di `katalog/10-model-data.md`, alur uang di `keuangan/10-komisi-transparan.md`.
-3. Mobile: `platform/40-mobile-KMP.md` + `produk/30-modul-KMP-bersama.md` + `produk/20-kontrak-api-KMP-mobile.md`.
-4. Web: `platform/50-web-bun-svelte.md` + `produk/21-kontrak-api-web-bun.md`.
-5. Sinkron: `platform/60-offline-sinkron.md`. Target: `metrik/10-lapak-aktif.md`.
+Pola yang ditiru: penamaan `versions/vX.Y.Z/BRD|PRD|FRD|FSD/`, file `NN-nama-kebab.md`, header versi satu baris, dan bagian Batasan di tiap file.
 
-Varian 1 — Indonesia penuh, tanpa placeholder.
+## Batasan
+
+Batasan ruang lingkup repo ini: hanya lapak terkurasi, katalog produk, alur beli multi-lapak, komisi transparan, escrow kasir, dan kontrak API Pasaree. Di luar batas: armada, gudang, jadwal trip, dan kas payout yang menjadi milik Lumbung-TownHall dan hanya diakses via integrasi proksi; resep dapur milik Pawonee; routing last-mile milik Pedaree; skema titip milik TitipO; audit independen milik Titeny. Setiap lapak wajib mengisi `titik_serah_lumbung_id`; pengiriman di luar trip memerlukan persetujuan kurator dan catat manual.
