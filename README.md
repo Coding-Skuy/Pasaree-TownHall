@@ -2,6 +2,9 @@
 
 > Selamat datang, Pengelana. Anda berada di jantung dokumentasi Pasaree.
 > Pilih jalan Anda untuk memahami ekosistem ChefGenie.
+>
+> **Tautan ke visi:** Pasaree adalah pasar visi ChefGenie — lapak terkurasi,
+> katalog jujur, komisi 8% terbuka. Lihat [VISI-MISI](../../VISI-MISI.md).
 
 ---
 
