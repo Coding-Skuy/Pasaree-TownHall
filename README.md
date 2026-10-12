@@ -30,6 +30,12 @@ Akses dokumentasi tersertifikasi dan versi:
   - [FSD (Functional Spec Design)](./platform/versions/v1.0.0/FSD/) — Spesifikasi design
   - [SRS (Software Requirements Spec)](./platform/versions/v1.0.0/SRS/) — Requirement teknis & QA
 
+### Platform ~ Aplikasi
+
+Tujuh repo kode divisi, ditautkan sebagai git submodule:
+
+- [Aplikasi (indeks)](./platform/apps/) — `app-kmp`, `web`, `backend-service`, `ai-models`, `data-pipeline`, `design`, `infra-devops`
+
 ### Roadmap Living
 
 Pantau rencana dan milestone terkini:

@@ -1,0 +1,21 @@
+[submodule "platform/apps/app-kmp"]
+	path = platform/apps/app-kmp
+	url = https://github.com/Coding-Skuy/pasaree-app-kmp.git
+[submodule "platform/apps/web"]
+	path = platform/apps/web
+	url = https://github.com/Coding-Skuy/pasaree-web.git
+[submodule "platform/apps/backend-service"]
+	path = platform/apps/backend-service
+	url = https://github.com/Coding-Skuy/pasaree-backend-service.git
+[submodule "platform/apps/ai-models"]
+	path = platform/apps/ai-models
+	url = https://github.com/Coding-Skuy/pasaree-ai-models.git
+[submodule "platform/apps/data-pipeline"]
+	path = platform/apps/data-pipeline
+	url = https://github.com/Coding-Skuy/pasaree-data-pipeline.git
+[submodule "platform/apps/design"]
+	path = platform/apps/design
+	url = https://github.com/Coding-Skuy/pasaree-design.git
+[submodule "platform/apps/infra-devops"]
+	path = platform/apps/infra-devops
+	url = https://github.com/Coding-Skuy/pasaree-infra-devops.git
